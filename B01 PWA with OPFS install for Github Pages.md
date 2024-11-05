@@ -279,7 +279,7 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 ```
-### 3. Add paths to svelte.config.js
+### 3. Add paths to svelte.config.js (uncomment)
 ```js
 paths: {
 	base: process.argv.includes('dev') ? '' : process.env.BASE_PATH
