@@ -2,7 +2,6 @@
 	"id": "ffd-B01-pwa",
 	"short_name": "B01",
 	"start_url": "/",
-	"scope": "/B01/",
 	"display": "standalone",
 	"orientation": "portrait",
 	"theme_color": "#A3E635",
