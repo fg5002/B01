@@ -205,7 +205,7 @@ self.addEventListener('fetch', (event) => {
 			/* Insert cross-origin isolation headers here and
 			comment out next line*/
 			return response;
-	      
+
 		} catch (err) {
 			const response = await cache.match(event.request);
 			if (response) {
