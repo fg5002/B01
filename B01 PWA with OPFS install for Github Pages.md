@@ -77,7 +77,6 @@ git init
 git branch -M main
 git add .
 git commit -m "initial commit"
-git init && git add -A && git commit -m "Initial commit"
 ```
 ---
 ## **3. Set up SPA**
@@ -103,7 +102,6 @@ const config = {
 };
 
 export default config;
-
 ```
 ### 3. Add +layout.js to routes
 
