@@ -285,7 +285,9 @@ paths: {
 	base: process.argv.includes('dev') ? '' : process.env.BASE_PATH
 }
 ```
-### 4. Add to remote repo to Git and upload to Github
+### 4. Create a new repo: B01 in Github
+### 5. Github B01/settings/pages -> Source: Github Actions
+### 6. Add to remote repo to Git and upload to Github
 ```bash
 git remote add origin git@github.com:fg5002/B01.git
 git add .
@@ -293,7 +295,6 @@ git commit -m "Github Pages setted up"
 npm run build
 git push -u origin main
 ```
-### 5. Github B01/settings/pages -> Source: Github Actions
 ---
 ## **6. Install SQLocal and set up OPFS**
 ### 1. Install SQLocal
