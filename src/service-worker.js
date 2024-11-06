@@ -50,9 +50,20 @@ self.addEventListener('fetch', (event) => {
 				cache.put(event.request, response.clone());
 			}
 
-			/* Insert cross-origin isolation headers here and
-			comment out next line*/
-			return response;
+			// cross-origin isolation using COOP and COEP headers 
+			const newHeaders = new Headers(response.headers); 
+			newHeaders.set("Cross-Origin-Embedder-Policy", "require-corp"); 
+			newHeaders.set("Cross-Origin-Opener-Policy", "same-origin"); 
+
+			const moddedResponse = new Response(response.body, { 
+				status: response.status, 
+				statusText: response.statusText, 
+				headers: newHeaders, 
+			}); 
+
+			return moddedResponse;
+			
+			//return response;
 
 		} catch (err) {
 			const response = await cache.match(event.request);
