@@ -1,4 +1,4 @@
-# Offline-first PWA for Github Pages
+# Offline-first PWA with OPFS deployed to Github Pages
 ## **1. Set up Sveltekit project**
 ### 1. Install Sveltekit
 ```bash
@@ -287,7 +287,7 @@ paths: {
 ```
 ### 4. Create a new repo: B01 in Github
 ### 5. Github B01/settings/pages -> Source: Github Actions
-### 6. Add to remote repo to Git and upload to Github
+### 6. Add remote repo to Git and upload to Github
 ```bash
 git remote add origin git@github.com:fg5002/B01.git
 git add .
