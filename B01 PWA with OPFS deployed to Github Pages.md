@@ -122,7 +122,8 @@ git commit -m "SPA added"
 {
 	"id": "ffd-B01-pwa",
 	"short_name": "B01",
-	"start_url": "/",
+	"start_url": "/B01/", // ez a jó!
+	"scope": "/B01/",	// ez a jó!
 	"display": "standalone",
 	"orientation": "portrait",
 	"theme_color": "#A3E635",
