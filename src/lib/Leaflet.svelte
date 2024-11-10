@@ -1,7 +1,7 @@
 <script>
   import 'leaflet/dist/leaflet.css';
   import L from 'leaflet';
-  import { onMount, setContext } from 'svelte'
+  import { onMount, setContext } from 'svelte';
 
 	let {
 		mapState,
@@ -21,10 +21,6 @@
     Array.isArray(a) ? currentMapState.center = a : currentMapState.zoom = a;
 		onMapStateChange(currentMapState);
 	}
-
-  $effect(()=>{
-    $inspect(JSON.stringify(currentMapState));
-  });
 
   onMount(()=> {
     map = L.map(mapContainer, {
@@ -50,5 +46,7 @@
 </script>
 
 <div class="w-full h-full z-1000" bind:this={mapContainer}>
-	{@render children?.()};
+  {#if map}
+    {@render children?.()}
+  {/if}
 </div>;
