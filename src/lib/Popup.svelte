@@ -17,7 +17,7 @@
   onMount(()=> {
     popup = L.popup({
       closeButton : false,
-      autoPanPadding: [50,50],
+      autoPanPadding: [80,80],
       offset: [0,0]
     }).setContent(popupContainer);
 
@@ -49,8 +49,8 @@
   }
 </style>
 
-<div class="flex justify-center w-auto p-0" bind:this={popupContainer}>
+<div class="flex justify-center p-0" bind:this={popupContainer}>
   {#if open}
     {@render children?.()}
   {/if}
-</div>;
+</div>

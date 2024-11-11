@@ -18,7 +18,7 @@
   setContext('layer', {getLayer: ()=> marker});
 
   onMount(()=> {
-    marker = L.marker(markerPosition, {draggable: true, autoPan: true, autoPanSpeed: 20})
+    marker = L.marker(markerPosition)
     .addTo(map);
     
     return ()=> {
@@ -33,4 +33,4 @@
   {#if marker}
     {@render children?.()}
   {/if}
-</div>;
+</div>
