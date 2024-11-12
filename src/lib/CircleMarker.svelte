@@ -5,7 +5,9 @@
   import {mapState} from '$lib/store';
 
   let { 
-    circlemarkerPosition = $mapState.center,
+    position = $mapState.center,
+    fillcolor = 'red',
+    color = 'black',
     children
   } = $props();
 
@@ -18,13 +20,13 @@
   setContext('layer', {getLayer: ()=> circlemarker});
 
   onMount(()=> {
-    circlemarker = L.circleMarker(circlemarkerPosition, {
-      fillColor: 'yellowgreen',
+    circlemarker = L.circleMarker(position, {
+      fillColor: fillcolor,
       radius: 7,
-      color: 'black',
+      color: color,
       weight: 1,
       opacity: 1.0,
-      fillOpacity: 0.5
+      fillOpacity: 1.0
     })
     .addTo(map);
     
