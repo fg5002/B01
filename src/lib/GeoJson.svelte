@@ -1,12 +1,10 @@
 <script>
   import L from 'leaflet';
   import {getContext, onMount} from 'svelte';
-  import Popup from "$lib/Popup.svelte";
-  import CircleMarker from "$lib/CircleMarker.svelte";
   
   let {
     data,
-    fillcolor = 'lime', 
+    fillcolor = 'yellowgreen', 
     color = 'black', 
     children
   } = $props();
@@ -19,32 +17,35 @@
 
   $effect(()=> geojson && geojson.clearLayers().addData(data));
 
-  const options = {
-    onEachFeature: (feature, layer)=> {
-      layer.bindPopup(feature.properties.data,{
-        closeButton: false,
-        offset: L.point({x:0, y:-5}),
-        maxWidth: 200       
-      })      
-    },
-
-    pointToLayer: (feature, latlng)=>{
-      return L.circleMarker(latlng)
-    },
-
-    style: {      
-      fillColor: fillcolor,
-      radius: 7,
-      color: color,
-      weight: 1,
-      opacity: 1.0,
-      fillOpacity: 1.0
-    }
+  const popupContent = (data)=> {
+    return  `<div class="flex flex-col justify-center p-2 bg-yellow-200">
+              <div class="font-bold whitespace-nowrap">${data}</div>
+            </div>`
   }
 
   onMount(()=> {
     if(map){
-      geojson = L.geoJSON(data, options).addTo(map);
+      geojson = L.geoJSON(data, {
+
+        onEachFeature: (feature, layer)=> {
+          layer.bindPopup(
+            popupContent(feature.properties.data), 
+            {closeButton: false, offset: [0,-5]}
+          )      
+        },
+
+        pointToLayer: (feature, latlng)=> L.circleMarker(latlng),
+
+        style: {      
+          fillColor: fillcolor,
+          radius: 7,
+          color: color,
+          weight: 1,
+          opacity: 1.0,
+          fillOpacity: 1.0
+        }
+
+      }).addTo(map);
 
       return ()=> {
         geojson?.remove();

@@ -18,7 +18,7 @@
     popup = L.popup({
       closeButton : false,
       autoPanPadding: [80,80],
-      offset: [0,0]
+      offset: [0,-5]
     }).setContent(popupContainer);
 
     if(layer){
@@ -35,19 +35,6 @@
 	});
   
 </script>
-
-<style>
-  :global(.leaflet-popup-content-wrapper) {   
-    padding: 0px;
-  }
-  :global(.leaflet-popup-content) {
-    padding: 0px;
-    margin: 0px;
-  }
-  :global(.leaflet-popup-tip) {
-    background-color: rgb(254 240 138);
-  }
-</style>
 
 <div class="flex justify-center p-0" bind:this={popupContainer}>
   {#if open}

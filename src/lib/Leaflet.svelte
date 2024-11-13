@@ -45,6 +45,19 @@
   
 </script>
 
+<style>
+  :global(.leaflet-popup-content-wrapper) {   
+    padding: 0px;
+  }
+  :global(.leaflet-popup-content) {
+    padding: 0px;
+    margin: 0px;
+  }
+  :global(.leaflet-popup-tip) {
+    background-color: rgb(254 240 138);
+  }
+</style>
+
 <div class="w-full h-full z-1000" bind:this={mapContainer}>
   {#if map}
     {@render children?.()}
