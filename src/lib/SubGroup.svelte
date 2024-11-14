@@ -8,13 +8,13 @@
   let subgroup = $state();
   
   const controlLayers = getContext('controllayers');
-  //const markerCluster = getContext('markercluster');
+  const markerCluster = getContext('markercluster');
   const map = getContext('map');
 
   setContext('subgroup', ()=> subgroup);
 
   onMount(()=> {
-    subgroup = L.featureGroup.subGroup(map());
+    subgroup = L.featureGroup.subGroup(markerCluster ? markerCluster() : map());
     controlLayers().addOverlay(subgroup, name);
 
     return ()=> {

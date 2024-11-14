@@ -16,14 +16,24 @@
 
   const map = getContext('map');
   const subGroup = getContext('subgroup');
+  const markerCluster = getContext('markercluster');
   const clustered = hasContext('markercluster');
 
   $effect(()=> {
-    geojson && subGroup().removeLayer(geojson);
     geojson && geojson.clearLayers().addData(data);
-    geojson && subGroup().addLayer(geojson);
+    if( geojson && subGroup){
+      subGroup().removeLayer(geojson);
+      subGroup().addLayer(geojson);
+    }
+    if(geojson && subGroup && markerCluster){
+      markerCluster().removeLayer(subGroup());
+      markerCluster().addLayer(subGroup());
+    }
+    if(geojson && markerCluster){
+      markerCluster().removeLayer(subGroup());
+      markerCluster().addLayer(geojson);
+    }
   })
-
 
   const popupContent = (data)=> {
     return  `<div class="flex flex-col justify-center p-2 bg-yellow-200">
@@ -54,6 +64,14 @@
       geojson.addTo(subGroup());
       if($mapState.overlays.includes(name)){
         subGroup().addTo(map());    
+      }
+      if(markerCluster){
+        markerCluster().addLayer(geojson);
+        subGroup().addTo(map())
+      }
+      if(subGroup && markerCluster){
+        markerCluster().addLayer(subGroup());
+        //subGroup().addTo(markerCluster())
       }
     }else{
       geojson.addTo(map());

@@ -7,23 +7,23 @@
 
   let children = $props();
 
-  let markercluster = $state();
+  let markerCluster = $state();
   let markerClusterContainer = $state();
 
   const map = getContext('map');
 
-  setContext('markercluster', ()=> markercluster);
+  setContext('markercluster', ()=> markerCluster);
 
   onMount(()=> {
 
-    markercluster = L.markerClusterGroup({
+    markerCluster = L.markerClusterGroup({
       spiderfyOnMaxZoom: true,
       showCoverageOnHover: true,
       zoomToBoundsOnClick: true
     }).addTo(map());
 
     return ()=> {
-      markercluster?.remove();
+      markerCluster?.remove();
       markercluster = undefined;
     };
   });
@@ -31,7 +31,7 @@
 </script>
 
 <div bind:this={markerClusterContainer}>
-  
+  {#if markerCluster}
     {@render children?.()}
-
+  {/if}
 </div>

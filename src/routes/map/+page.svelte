@@ -6,10 +6,10 @@
   import Cursor from "$lib/Cursor.svelte";
   import Control from "$lib/Control.svelte";
   import GeoJson from "$lib/GeoJson.svelte";
-  import MarkerCluster from "$lib/MarkerCluster.svelte";
   import SubGroup from "$lib/SubGroup.svelte";
   import Layers from "$lib/Layers.svelte";
   import TileLayer from "$lib/TileLayer.svelte";
+  import MarkerCluster from "$lib/MarkerCluster.svelte";
 
   let showcursor = $state(false);
 
@@ -66,11 +66,9 @@
       options={{ minZoom:7, maxZoom:18, attribution: '&copy; Túristautak.hu', crossOrigin : true}}
     />
 
-    <!--MarkerCluster-->
-      <SubGroup name={"Sample"}>
-        <GeoJson data={$sampleData}/>
-      </SubGroup>     
-    <!--/MarkerCluster-->
+    <SubGroup name={"Sample"}>
+      <GeoJson data={$sampleData}/>
+    </SubGroup>     
 
   </Layers>
     
