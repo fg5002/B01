@@ -12,8 +12,7 @@
   let markerContainer = $state();
 	let marker = $state();
 
-  const { getMap } = getContext('map');
-	const map = getMap();
+  const map = getContext('map');
 
   setContext('layer', {getLayer: ()=> marker});
 

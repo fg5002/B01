@@ -1,6 +1,11 @@
 import {writable} from 'svelte/store';
 
-export const mapState = writable({center: [47.391857,19.03352], zoom: 16});
+export const mapState = writable({
+  center: [47.391857,19.03352], 
+  zoom: 16,
+  baselayer: 'OSM',
+  overlays: []
+});
 
 export const sampleData = writable({
   'type': 'FeatureCollection',

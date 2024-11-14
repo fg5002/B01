@@ -14,13 +14,12 @@
   let circlemarkerContainer = $state();
 	let circlemarker = $state();
 
-  const { getMap } = getContext('map');
-	const map = getMap();
+  const map = getContext('map');
 
   setContext('layer', {getLayer: ()=> circlemarker});
 
   onMount(()=> {
-    circlemarker = L.circleMarker(position, {
+    circlemarker = map() && L.circleMarker(position, {
       fillColor: fillcolor,
       radius: 7,
       color: color,
@@ -28,7 +27,7 @@
       opacity: 1.0,
       fillOpacity: 1.0
     })
-    .addTo(map);
+    .addTo(map());
     
     return ()=> {
       circlemarker?.remove();

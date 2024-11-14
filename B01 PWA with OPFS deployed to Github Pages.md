@@ -392,3 +392,10 @@ npm install @turf/bearing @turf/destination @turf/distance @turf/midpoint @turf/
 export const prerender = false;
 ```
 ---
+### 8. run developer server
+```bash
+npm run dev -- --open
+```
+#### if ```SvelteKitError: Not found: /favicon.ico``` in terminal
+- *create a **'public'** folder in **'static'** folder*
+- ***'static/favicon.png'** replace to **'static/public/favicon.png'***

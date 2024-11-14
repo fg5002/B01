@@ -2,40 +2,42 @@
   import 'leaflet/dist/leaflet.css';
   import L from 'leaflet';
   import { onMount, setContext } from 'svelte';
+  import {mapState} from '$lib/store';
 
-	let {
-		mapState,
-    onMapStateChange,
-		children
-	} = $props();
+	let {children} = $props();
 
 	let mapContainer = $state();
 	let map = $state();
-  let currentMapState = $state(mapState);
 
-  setContext('map', {getMap: ()=> map});
+  setContext('map', ()=> map);
 
   const latLngToLatlngArray = (a)=> [a.lat, a.lng].map(c=>parseFloat(c.toFixed(6)));
 
-  const mapStateChange = (a)=> {
-    Array.isArray(a) ? currentMapState.center = a : currentMapState.zoom = a;
-		onMapStateChange(currentMapState);
-	}
-
   onMount(()=> {
     map = L.map(mapContainer, {
-      center: mapState.center, 
-      zoom: mapState.zoom
+      center: $mapState.center, 
+      zoom: $mapState.zoom
     })
-    .on('dragend', ()=> mapStateChange(latLngToLatlngArray(map.getCenter())))
-    .on('zoomend', ()=> mapStateChange(map.getZoom()));
-
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      minZoom: 7,
-      maxZoom: 19,
-      attribution: '&copy; OpenstreetMap',
-      crossOrigin : true
-    }).addTo(map);
+    .on('dragend', ()=> {
+      $mapState.center = latLngToLatlngArray(map.getCenter());
+    })
+    .on('zoomend', ()=> {
+      $mapState.zoom = map.getZoom();
+      $mapState.center = latLngToLatlngArray(map.getCenter());
+    })
+    .on('baselayerchange', (e)=> {
+      $mapState.baselayer= e.name;
+      console.log($mapState.baselayer);
+    })
+    .on('overlayadd', (e)=> {
+      if($mapState.overlays.includes(e.name)) return;
+      $mapState.overlays = [...$mapState.overlays, e.name];
+      console.log($mapState.overlays);
+    })
+    .on('overlayremove', (e)=> {
+      $mapState.overlays = $mapState.overlays.filter(d=> d!=e.name);
+      console.log($mapState.overlays);
+    });
     
     return ()=> {
       map?.remove();
